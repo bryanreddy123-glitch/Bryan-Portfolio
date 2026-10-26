@@ -12,14 +12,8 @@
   var $main = $('#main');
   var $intro = $('#intro');
 
-  // Responsive breakpoints used by the original HTML5 UP template.
-  breakpoints({
-    xlarge: ['1281px', '1680px'],
-    large: ['981px', '1280px'],
-    medium: ['737px', '980px'],
-    small: ['481px', '736px'],
-    xsmall: [null, '480px']
-  });
+  // CSS handles layout breakpoints. Use matchMedia for intro relocation so
+  // browser zoom reliably moves the profile between the sidebar and page top.
 
   // Remove the page-load animation guard once the page is ready.
   $window.on('load', function () {
@@ -42,15 +36,28 @@
     });
   }
 
-  // On smaller screens, move the profile intro above the main content.
-  if ($intro.length && $main.length && $sidebar.length && typeof breakpoints.on === 'function') {
-    breakpoints.on('<=large', function () {
-      $intro.prependTo($main);
-    });
+  // Keep the profile intro at the top on tablet/mobile and in the left
+  // sidebar on wider layouts. Native matchMedia responds consistently to zoom.
+  if ($intro.length && $main.length && $sidebar.length && window.matchMedia) {
+    var introLayoutQuery = window.matchMedia('(max-width: 1280px)');
 
-    breakpoints.on('>large', function () {
-      $intro.prependTo($sidebar);
-    });
+    function placeIntro() {
+      if (introLayoutQuery.matches) {
+        if ($intro.parent()[0] !== $main[0]) {
+          $intro.prependTo($main);
+        }
+      } else if ($intro.parent()[0] !== $sidebar[0]) {
+        $intro.prependTo($sidebar);
+      }
+    }
+
+    placeIntro();
+
+    if (typeof introLayoutQuery.addEventListener === 'function') {
+      introLayoutQuery.addEventListener('change', placeIntro);
+    } else if (typeof introLayoutQuery.addListener === 'function') {
+      introLayoutQuery.addListener(placeIntro);
+    }
   }
 
   // Keep the copyright year current without requiring a backend.
