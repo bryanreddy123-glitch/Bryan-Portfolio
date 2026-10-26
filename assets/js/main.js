@@ -1,95 +1,68 @@
 /*
-	Future Imperfect by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+  Bryan Reddy portfolio interactions.
+  Retains the original Future Imperfect menu and responsive intro behaviour.
 */
+(function ($) {
+  'use strict';
 
-(function($) {
+  var $window = $(window);
+  var $body = $('body');
+  var $menu = $('#menu');
+  var $sidebar = $('#sidebar');
+  var $main = $('#main');
+  var $intro = $('#intro');
 
-	var	$window = $(window),
-		$body = $('body'),
-		$menu = $('#menu'),
-		$sidebar = $('#sidebar'),
-		$main = $('#main');
+  // Responsive breakpoints used by the original HTML5 UP template.
+  breakpoints({
+    xlarge: ['1281px', '1680px'],
+    large: ['981px', '1280px'],
+    medium: ['737px', '980px'],
+    small: ['481px', '736px'],
+    xsmall: [null, '480px']
+  });
 
-	// Breakpoints.
-		breakpoints({
-			xlarge:   [ '1281px',  '1680px' ],
-			large:    [ '981px',   '1280px' ],
-			medium:   [ '737px',   '980px'  ],
-			small:    [ '481px',   '736px'  ],
-			xsmall:   [ null,      '480px'  ]
-		});
+  // Remove the page-load animation guard once the page is ready.
+  $window.on('load', function () {
+    window.setTimeout(function () {
+      $body.removeClass('is-preload');
+    }, 100);
+  });
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+  // Keep the template's slide-out navigation panel.
+  if ($menu.length && typeof $menu.panel === 'function') {
+    $menu.appendTo($body).panel({
+      delay: 500,
+      hideOnClick: true,
+      hideOnSwipe: true,
+      resetScroll: true,
+      resetForms: true,
+      side: 'right',
+      target: $body,
+      visibleClass: 'is-menu-visible'
+    });
+  }
 
-	// Menu.
-		$menu
-			.appendTo($body)
-			.panel({
-				delay: 500,
-				hideOnClick: true,
-				hideOnSwipe: true,
-				resetScroll: true,
-				resetForms: true,
-				side: 'right',
-				target: $body,
-				visibleClass: 'is-menu-visible'
-			});
+  // On smaller screens, move the profile intro above the main content.
+  if ($intro.length && $main.length && $sidebar.length && typeof breakpoints.on === 'function') {
+    breakpoints.on('<=large', function () {
+      $intro.prependTo($main);
+    });
 
-	// Search (header).
-		var $search = $('#search'),
-			$search_input = $search.find('input');
+    breakpoints.on('>large', function () {
+      $intro.prependTo($sidebar);
+    });
+  }
 
-		$body
-			.on('click', '[href="#search"]', function(event) {
+  // Keep the copyright year current without requiring a backend.
+  $('#current-year').text(new Date().getFullYear());
 
-				event.preventDefault();
-
-				// Not visible?
-					if (!$search.hasClass('visible')) {
-
-						// Reset form.
-							$search[0].reset();
-
-						// Show.
-							$search.addClass('visible');
-
-						// Focus input.
-							$search_input.focus();
-
-					}
-
-			});
-
-		$search_input
-			.on('keydown', function(event) {
-
-				if (event.keyCode == 27)
-					$search_input.blur();
-
-			})
-			.on('blur', function() {
-				window.setTimeout(function() {
-					$search.removeClass('visible');
-				}, 100);
-			});
-
-	// Intro.
-		var $intro = $('#intro');
-
-		// Move to main on <=large, back to sidebar on >large.
-			breakpoints.on('<=large', function() {
-				$intro.prependTo($main);
-			});
-
-			breakpoints.on('>large', function() {
-				$intro.prependTo($sidebar);
-			});
+  // Close the mobile panel after navigating to an on-page section.
+  // The original panel also has hideOnClick enabled; this is an extra
+  // keyboard- and touch-friendly fallback for links inside the menu.
+  $('#menu a[href^="#"]').on('click', function () {
+    window.setTimeout(function () {
+      $body.removeClass('is-menu-visible');
+    }, 50);
+  });
 
 })(jQuery);
