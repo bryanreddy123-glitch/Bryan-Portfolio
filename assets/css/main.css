@@ -4645,3 +4645,177 @@ svg {
     max-width: 100%;
   }
 }
+
+/* Palette variables are intentionally placed at the end so they override the earlier template values. */
+:root {
+  --portfolio-ink: #06070e;
+  --portfolio-muted: #646464;
+  --portfolio-teal: #29524a;
+  --portfolio-teal-dark: #1b3933;
+  --portfolio-accent: #2ebaae;
+  --portfolio-sage: #94a187;
+  --portfolio-beige: #c5afa0;
+  --portfolio-line: rgba(6, 7, 14, 0.13);
+  --portfolio-soft: #edf0e9;
+  --portfolio-paper: #ffffff;
+  --portfolio-shadow: 0 14px 38px rgba(6, 7, 14, 0.07);
+}
+
+body {
+  background: #f4f4f4;
+  color: var(--portfolio-muted);
+}
+
+/* =====================================================================
+   Combined palette finishing layer
+   Midnight #06070E · Pine #29524A · Sage #94A187 · Beige #C5AFA0
+   Original vivid teal #2EBAAE is reserved for small interactive accents.
+   ===================================================================== */
+
+#header {
+  background: rgba(6, 7, 14, 0.97);
+  box-shadow: 0 3px 18px rgba(6, 7, 14, 0.12);
+}
+
+#header h1 a,
+#header .links ul li a,
+#header .main ul li > a {
+  color: #f4f4f4;
+}
+
+#header .links ul li a:hover,
+#header .main ul li > a:hover,
+#header .main ul li > a:hover:before {
+  color: var(--portfolio-accent) !important;
+}
+
+#header .links ul li {
+  border-left-color: rgba(244, 244, 244, 0.16);
+}
+
+#menu {
+  background: #06070e;
+  color: #f4f4f4;
+}
+
+#menu h3,
+#menu a,
+#menu .links > li a h3 {
+  color: #f4f4f4;
+}
+
+#menu .links > li,
+#menu section {
+  border-top-color: rgba(244, 244, 244, 0.16);
+}
+
+#menu .links > li a:hover h3,
+#menu a:hover {
+  color: var(--portfolio-accent) !important;
+}
+
+.intro-post {
+  background: linear-gradient(125deg, #ffffff 0%, #fbfcf9 65%, #f1e9e2 100%);
+}
+
+.intro-post .hero-eyebrow,
+.section-kicker,
+.timeline-date,
+.cert-issuer {
+  color: var(--portfolio-teal);
+}
+
+.intro-post .hero-copy strong {
+  color: var(--portfolio-teal);
+}
+
+.tag-list li,
+.skill-tags li {
+  background: rgba(148, 161, 135, 0.20);
+  border-color: rgba(41, 82, 74, 0.22);
+  color: #29524a;
+}
+
+.image-placeholder {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(148, 161, 135, 0.28) 0, rgba(148, 161, 135, 0.28) 12%, transparent 12.5%),
+    linear-gradient(135deg, #edf0e9 0%, #fbfaf8 56%, #efe5de 100%);
+  border-color: rgba(41, 82, 74, 0.35);
+  color: #29524a;
+}
+
+.image-placeholder:before {
+  border-color: rgba(41, 82, 74, 0.14);
+}
+
+.image-placeholder:after {
+  background: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(41, 82, 74, 0.045) 10px, rgba(41, 82, 74, 0.045) 11px);
+}
+
+.timeline {
+  border-left-color: rgba(41, 82, 74, 0.25);
+}
+
+.timeline-item:before {
+  background: var(--portfolio-teal);
+  box-shadow: 0 0 0 1px rgba(41, 82, 74, 0.25);
+}
+
+.info-card:hover,
+.project-card:hover,
+.impact-card:hover {
+  border-color: rgba(46, 186, 174, 0.45);
+}
+
+.card-icon {
+  background: #edf0e9;
+  color: var(--portfolio-teal);
+}
+
+.education-panel {
+  background: #edf0e9;
+  border-left-color: var(--portfolio-teal);
+}
+
+.contact-panel {
+  background: linear-gradient(135deg, #f3f5ef 0%, #ffffff 70%, #f4ebe5 100%);
+}
+
+.contact-links a .icon {
+  color: var(--portfolio-teal);
+}
+
+#footer {
+  background: #06070e;
+  border-top: 3px solid var(--portfolio-teal);
+  border-radius: 6px;
+  color: #f4f4f4;
+  padding: 1.5em;
+}
+
+#footer a,
+#footer .copyright,
+#footer .icons a {
+  color: #f4f4f4;
+}
+
+#footer a:hover,
+#footer .icons a:hover {
+  color: var(--portfolio-accent) !important;
+}
+
+#footer .copyright a {
+  border-bottom-color: rgba(244, 244, 244, 0.35);
+}
+
+::selection {
+  background: rgba(46, 186, 174, 0.28);
+  color: #06070e;
+}
+
+@media screen and (max-width: 736px) {
+  #footer {
+    padding: 1.2em;
+  }
+}
+
